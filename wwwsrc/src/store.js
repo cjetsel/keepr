@@ -16,7 +16,9 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: {},
+    vaults: [],
+    keeps: []
   },
   mutations: {
     setUser(state, user) {
@@ -25,9 +27,16 @@ export default new Vuex.Store({
     resetState(state) {
       //clear the entire state object of user data
       state.user = {}
+    },
+    setVaults(state, vaults) {
+      state.vaults = vaults
+    },
+    setKeeps(state, keeps) {
+      state.keeps = keeps
     }
   },
   actions: {
+    //#region  Account
     async register({ commit, dispatch }, creds) {
       try {
         let user = await AuthService.Register(creds)
@@ -55,6 +64,47 @@ export default new Vuex.Store({
       } catch (e) {
         console.warn(e.message)
       }
+    },
+    //#endregion
+    //#region Vaults
+    async getVaultsByUser({ commit, dispatch }) {
+
+    },
+
+    async createVault({ commit, dispatch }, data) {
+
+    },
+
+    async deleteVault({ commit, dispatch }, value) {
+
+    },
+    //#endregion
+    //#region Keeps
+    async getAllKeeps({ commit, dispatch }) {
+
+    },
+    async getKeepsById({ commit, dispatch }) {
+      //update view
+    },
+    async getKeepsByUser({ commit, dispatch }) {
+
+    },
+
+    async createKeep({ commit, dispatch }, data) {
+
+    },
+    async deleteKeep({ commit, dispatch }, value) {
+
+    },
+    async addKeepToVault({ commit, dispatch }, data) {
+      //need to update count of adds
+    },
+    async removeKeepFromVault({ commit, dispatch }, data) {
+
     }
+
+
+
+
   }
 })

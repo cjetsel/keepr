@@ -7,17 +7,21 @@
 </template>
 
 <script>
-export default {
-  name: "home",
-  computed: {
-    user() {
-      return this.$store.state.user;
+  import Navbar from "../components/Navbar.vue"
+  export default {
+    name: "home",
+    computed: {
+      user() {
+        return this.$store.state.user;
+      }
+    },
+    methods: {
+      logout() {
+        this.$store.dispatch("logout");
+      }
+    },
+    components: {
+      Navbar
     }
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch("logout");
-    }
-  }
-};
+  };
 </script>
