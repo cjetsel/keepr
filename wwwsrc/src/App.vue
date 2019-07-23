@@ -1,14 +1,13 @@
 <template>
-  <div id="app" class="container-fluid">
+  <b-container id="app" fluid>
     <navbar />
     <router-view />
 
-  </div>
+  </b-container>
 </template>
 <script>
   import Navbar from "./components/Navbar.vue"
   export default {
-    name: "App",
     components: {
       Navbar
     }

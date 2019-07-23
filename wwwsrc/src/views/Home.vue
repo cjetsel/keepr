@@ -3,11 +3,13 @@
     <h1>Welcome Home {{user.username}}</h1>
     <button v-if="user.id" @click="logout">logout</button>
     <router-link v-else :to="{name: 'login'}">Login</router-link>
+    <keeps />
   </div>
 </template>
 
 <script>
-  import Navbar from "../components/Navbar.vue"
+  import Navbar from "../components/Navbar.vue";
+  import Keeps from "../components/Keeps.vue"
   export default {
     name: "home",
     computed: {
@@ -21,7 +23,8 @@
       }
     },
     components: {
-      Navbar
+      Navbar,
+      Keeps
     }
   };
 </script>
