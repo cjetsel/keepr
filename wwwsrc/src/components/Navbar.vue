@@ -2,7 +2,7 @@
   <div>
     <div>
       <b-navbar toggleable="lg" type="dark" variant="info">
-        <b-img src="~/assets/svg/"></b-img>
+        <b-img :src="images.logo"></b-img>
         <b-navbar-brand href="#">NavBar</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -21,12 +21,24 @@
             <b-dropdown-item href="#">FA</b-dropdown-item>
           </b-nav-item-dropdown>
 
-          <b-nav-item-dropdown right>
+          <b-nav-item-dropdown right v-if="user.id">
             <!-- Using 'button-content' slot -->
             <template slot="button-content"><em>User</em></template>
             <b-dropdown-item href="#">Keeps</b-dropdown-item>
             <b-dropdown-item href="#">Vaults</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
+            <button v-if="user.id" @click="logout">logout</button>
+            <router-link v-else :to="{name: 'login'}">Login</router-link>
+          </b-nav-item-dropdown>
+          <b-nav-item-dropdown right v-else>
+            <!-- Using 'button-content' slot -->
+            <template slot="button-content"><em>User</em></template>
+            <b-dropdown-item href="#">Keeps</b-dropdown-item>
+            <b-dropdown-item href="#">Create Account</b-dropdown-item>
+            <b-dropdown-item href="{name: 'login'}">Sign In</b-dropdown-item>
+
+
+
           </b-nav-item-dropdown>
         </b-navbar-nav>
         </b-collapse>
@@ -38,6 +50,13 @@
 <script>
   export default {
     name: "navbar",
+    data() {
+      return {
+        images: {
+          sample: require('../assets/static/logo.svg')
+        }
+      }
+    },
     computed: {
       user() {
         return this.$store.state.user;

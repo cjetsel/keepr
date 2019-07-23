@@ -23,7 +23,7 @@ namespace keepr.Repositories
     {
       string query = "SELECT * FROM keeps WHERE id=@id";
       Keep keep = _db.QueryFirstOrDefault<Keep>(query, new { id });
-      if (keep == null) throw new Exception("Invalid Id");
+      if (keep == null) throw new Exception("Invalid Id"); //needs to prompt user to login?
       return keep;
     }
 

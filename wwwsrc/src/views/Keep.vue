@@ -1,25 +1,21 @@
 <template>
-  <div class="home">
-    <h1>Welcome Home {{user.username}}</h1>
-    <button v-if="user.id" @click="logout">logout</button>
-    <router-link v-else :to="{name: 'login'}">Login</router-link>
-    <b-card-group columns v-if="redirectToKId">
-      <keeps v-for="keep in keep" :keep="keep" /><!-- V for keeps in keep on b-card -->
-    </b-card-group>
-    <b-card-group columns v-else>
-      <keeps v-for="keep in keeps" :keep="keep" :redirect="redirectToKId" /><!-- V for keeps in keep on b-card -->
+  <div class="keep">
+
+    <b-card-group columns>
+      <keeps v-for="keep in myKeep" :keep="keep" /><!-- V for keeps in keep on b-card -->
     </b-card-group>
   </div>
 </template>
 
 <script>
-  import Navbar from "../components/Navbar.vue";
   import Keeps from "../components/Keeps.vue"
+  import Navbar from "../components/Navbar.vue"
   export default {
-    name: "home",
+    name: "keep",
+    prop: ["keepId"],
     data() {
       return {
-        redirectToKId: false
+
       }
     },
     computed: {
@@ -28,6 +24,9 @@
       },
       keeps() {
         return this.$store.state.keeps;
+      },
+      myKeep() {
+        return this.$store.state.keep;
       }
       // keep() {
       //   return this.$store.state.keep;
@@ -35,6 +34,7 @@
     },
     mounted() {
       this.$store.dispatch('getAllKeeps');
+      this.$store.dispatch('getKeepById');
     },
     methods: {
       logout() {

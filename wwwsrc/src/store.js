@@ -6,7 +6,7 @@ import AuthService from './AuthService'
 
 Vue.use(Vuex)
 
-let baseUrl = location.host.includes('localhost') ? '//localhost:5000/' : '/'
+let baseUrl = location.host.includes('localhost:8080') ? '//localhost:5000/' : '/'
 
 let api = Axios.create({
   baseURL: baseUrl + "api/",
@@ -18,7 +18,9 @@ export default new Vuex.Store({
   state: {
     user: {},
     vaults: [],
-    keeps: []
+    vault: {},
+    keeps: [],
+    keep: {}
   },
   mutations: {
     setUser(state, user) {
@@ -33,6 +35,9 @@ export default new Vuex.Store({
     },
     setKeeps(state, keeps) {
       state.keeps = keeps
+    },
+    setMyKeep(state, keep) {
+      state.keep = keep
     }
   },
   actions: {
@@ -81,10 +86,17 @@ export default new Vuex.Store({
     //#endregion
     //#region Keeps
     async getAllKeeps({ commit, dispatch }) {
-
+      await api.get('keeps')
+        .then(res => {
+          commit('setKeeps', res.data)
+        })
     },
-    async getKeepsById({ commit, dispatch }) {
+    async getKeepById({ commit, dispatch }, keepId) {
       //update view
+      await api.get('keeps/' + keepId)
+        .then(res => {
+          commit('setMyKeep', res.data)
+        })
     },
     async getKeepsByUser({ commit, dispatch }) {
 
