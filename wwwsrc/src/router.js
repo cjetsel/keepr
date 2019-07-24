@@ -6,6 +6,9 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 // @ts-ignore
 import Keep from './views/Keep.vue'
+import MyKeeps from './views/MyKeeps.vue'
+import MyVaults from './views/MyVaults.vue'
+import VaultKeeps from './views/VaultKeeps.vue'
 
 Vue.use(Router)
 
@@ -22,9 +25,25 @@ export default new Router({
       component: Login
     },
     {
-      path: '/keep/:keepId',
+      path: '/keeps/:keepId',
       name: 'keep',
+      props: true,
       component: Keep
+    },
+    {
+      path: '/myKeeps/',
+      name: 'myKeeps',
+      component: MyKeeps
+    },
+    {
+      path: '/myVaults/',
+      name: 'myVaults',
+      component: MyVaults
+    },
+    {
+      path: '/vaults/:vaultId',
+      name: 'VaultKeeps',
+      component: VaultKeeps
     }
   ]
 })

@@ -16,7 +16,7 @@ namespace keepr.Repositories
 
     public IEnumerable<Keep> GetALL()
     {
-      return _db.Query<Keep>("SELECT * FROM keeps;");
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE isPrivate=0;");
     }
 
     public Keep GetById(int id)
@@ -61,10 +61,10 @@ namespace keepr.Repositories
       return _db.QueryFirstOrDefault<Keep>(query, value);
     }
 
-    public string Delete(int id)
+    public string Delete(int id, string userId)
     {
-      string query = "DELETE FROM keeps WHERE id=@Id;";
-      int changedRows = _db.Execute(query, new { id });
+      string query = "DELETE FROM keeps WHERE id=@Id AND userId=@userId;";
+      int changedRows = _db.Execute(query, new { id, userId });
       if (changedRows < 1) throw new Exception("Invalid Id");
       return "Successfully Deleted Keep";
 

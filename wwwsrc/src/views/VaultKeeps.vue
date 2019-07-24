@@ -1,7 +1,8 @@
 <template>
-  <div class="keep">
+  <div class="vaultkeep">
+    vault keep deets
     <b-card-group columns>
-      <keeps :keep="myKeep" />
+      <keeps v-for="keep in vaultKeeps" :keep="keep" />
     </b-card-group>
   </div>
 </template>
@@ -10,15 +11,15 @@
   import Keeps from "../components/Keeps.vue"
   import Navbar from "../components/Navbar.vue"
   export default {
-    name: "keep",
-    props: ["keepId"],
+    name: "VaultKeep",
     data() {
       return {
 
       }
     },
     mounted() {
-      return this.$store.dispatch('getAllKeeps');
+      return this.$store.dispatch('getVaultsByUser');
+      return this.$store.dispatch('getKeepsByUser');
       // this.$store.dispatch('upViewCount'); -- this will up count on page load?
 
     },
@@ -29,11 +30,11 @@
       keeps() {
         return this.$store.state.keeps;
       },
-      myKeep() {
-        return this.$store.state.keep;
+      myVault() {
+        return this.$store.state.vault;
       },
-      myKeeps() {
-        return this.$store.state.keep
+      vaultKeeps() {
+        return this.$store.state.vaultKeeps;
       }
 
     },

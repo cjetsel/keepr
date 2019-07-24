@@ -20,7 +20,9 @@ export default new Vuex.Store({
     vaults: [],
     vault: {},
     keeps: [],
-    keep: {}
+    keep: {},
+    myKeeps: [],
+    vaultKeeps: []
   },
   mutations: {
     setUser(state, user) {
@@ -33,11 +35,20 @@ export default new Vuex.Store({
     setVaults(state, vaults) {
       state.vaults = vaults
     },
+    setVault(state, vault) {
+      state.vault = vault
+    },
     setKeeps(state, keeps) {
       state.keeps = keeps
     },
     setMyKeep(state, keep) {
       state.keep = keep
+    },
+    setMyKeeps(state, myKeeps) {
+      state.myKeeps = myKeeps
+    },
+    setVaultKeeps(state, vaultkeeps) {
+      state.vaultKeeps = vaultkeeps;
     }
   },
   actions: {
@@ -74,14 +85,32 @@ export default new Vuex.Store({
     //#region Vaults
     async getVaultsByUser({ commit, dispatch }) {
 
+      await api.get('vaults')
+        .then(res => {
+          commit('setVaults', res.data)
+        })
+    },
+
+    async getVaultById({ commit, dispatch }, vaultId) {
+
+      await api.get('vaults/' + vaultId)
+        .then(res => {
+          commit('setVault', res.data)
+        })
     },
 
     async createVault({ commit, dispatch }, data) {
-
+      await api.post('vaults', data)
+        .then(res => {
+          dispatch('getVaultsByUser');
+        })
     },
 
     async deleteVault({ commit, dispatch }, value) {
-
+      api.delete('vaults/' + value)
+        .then(res => {
+          dispatch('getVaultsByUser')
+        })
     },
     //#endregion
     //#region Keeps
@@ -93,27 +122,55 @@ export default new Vuex.Store({
     },
     async getKeepById({ commit, dispatch }, keepId) {
       //update view
+
       await api.get('keeps/' + keepId)
         .then(res => {
           commit('setMyKeep', res.data)
         })
     },
     async getKeepsByUser({ commit, dispatch }) {
-
+      await api.get('keeps/user')
+        .then(res => {
+          commit('setMyKeeps', res.data)
+        })
     },
 
     async createKeep({ commit, dispatch }, data) {
-
+      await api.post('keeps', data)
+        .then(res => {
+          dispatch('getAllKeeps');
+        })
     },
     async deleteKeep({ commit, dispatch }, value) {
+      api.delete('keeps/' + value)
+        .then(res => {
+          dispatch('getKeepsByUser')
+        })
 
     },
-    async addKeepToVault({ commit, dispatch }, data) {
+    async addToVault({ commit, dispatch }, data) {
       //need to update count of adds
+      await api.post('vaultkeeps', data)
+        .then(res => {
+          dispatch('getAllKeeps');
+        })
     },
+    async getKeepsByVault({ commit, dispatch }, vaultId) {
+      //update view
+      await api.get('vaultkeeps/' + vaultId)
+        .then(res => {
+          commit('setVaultKeeps', res.data)
+        })
+    },
+
     async removeKeepFromVault({ commit, dispatch }, data) {
 
+      let res = await api.put('vaultkeeps', data)
+        .then(res => {
+          dispatch('getKeepsByVault', data.vaultId)
+        })
     }
+
 
 
 

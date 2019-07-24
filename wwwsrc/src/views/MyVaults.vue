@@ -1,44 +1,37 @@
 <template>
   <div class="home">
     <h1>Welcome Home {{user.username}}</h1>
+
+    MY VAULTS
     <button v-if="user.id" @click="logout">logout</button>
     <router-link v-else :to="{name: 'login'}">Login</router-link>
-    <keepForm />
+    <vaultForm />
     <b-card-group columns>
-      <keeps v-for="keep in keeps" :keep="keep" /><!-- V for keeps in keep on b-card -->
+      <vault v-for="vault in vaults" :vault="vault" /><!-- V for keeps in keep on b-card -->
     </b-card-group>
-
   </div>
 </template>
 
 <script>
   import Navbar from "../components/Navbar.vue";
-  import Keeps from "../components/Keeps.vue"
-  import KeepForm from "../components/KeepForm.vue"
+  import Vault from "../components/Vault.vue"
+  import VaultForm from "../components/VaultForm.vue"
   export default {
-    name: "home",
+    name: "MyVaults",
     data() {
       return {
-        redirectToKId: false
       }
     },
     computed: {
       user() {
         return this.$store.state.user;
       },
-      keeps() {
-        return this.$store.state.keeps;
-      },
-      keep() {
-        return this.$store.state.keep;
+      vaults() {
+        return this.$store.state.vaults;
       }
-
     },
     mounted() {
-      this.$store.dispatch('getAllKeeps');
       this.$store.dispatch('getVaultsByUser');
-
-
     },
     methods: {
       logout() {
@@ -47,8 +40,8 @@
     },
     components: {
       Navbar,
-      Keeps,
-      KeepForm
+      Vault,
+      VaultForm
     }
   };
 </script>
