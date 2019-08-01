@@ -27,7 +27,8 @@ namespace keepr.Controllers
     {
       try
       {
-        return Ok(_repo.GetALL());
+        string userId = HttpContext.User.FindFirstValue("Id");
+        return Ok(_repo.GetALL(userId));
       }
       catch (Exception e)
       {
@@ -43,7 +44,6 @@ namespace keepr.Controllers
     {
       try
       {
-
         return Ok(_repo.GetById(id));
       }
       catch (Exception e)
@@ -87,15 +87,28 @@ namespace keepr.Controllers
       }
     }
 
-    // PUT api/Keep/5
-    [HttpPut("{id}")]
+    // PUT api/Keep/5views
+    [HttpPut("{id}views")]
     [Authorize]
-    public ActionResult<Keep> Put(int id, [FromBody] Keep value)
+    public ActionResult<Keep> UpdateCount([FromBody] ViewKeep value)
     {
       try
       {
-        value.Id = id;
-        return Ok(_repo.Update(value));
+        return Ok(_repo.UpdateCount(value));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
+
+    [HttpPut("{id}keeps")]
+    [Authorize]
+    public ActionResult<Keep> UpdateKeeps([FromBody] KeepCount value)
+    {
+      try
+      {
+        return Ok(_repo.UpdateKeeps(value));
       }
       catch (Exception e)
       {

@@ -1,10 +1,5 @@
 <template>
   <div class="home">
-    <h1>Welcome Home {{user.username}}</h1>
-
-    MY VAULTS
-    <button v-if="user.id" @click="logout">logout</button>
-    <router-link v-else :to="{name: 'login'}">Login</router-link>
     <vaultForm />
     <b-card-group columns>
       <vault v-for="vault in vaults" :vault="vault" /><!-- V for keeps in keep on b-card -->

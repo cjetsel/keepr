@@ -2,8 +2,8 @@
   <div>
     <div>
       <b-navbar toggleable="lg" type="dark" variant="info">
-        <b-img :src="images.logo"></b-img>
-        <b-navbar-brand href="#">NavBar</b-navbar-brand>
+
+        <b-navbar-brand href="{name: home}"><img src="../assets/static/home.svg" alt="" class="home"></b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -14,26 +14,16 @@
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
           </b-nav-form> -->
 
-          <b-nav-item-dropdown text="Lang" right>
-            <b-dropdown-item href="#">EN</b-dropdown-item>
-            <b-dropdown-item href="#">ES</b-dropdown-item>
-            <b-dropdown-item href="#">RU</b-dropdown-item>
-            <b-dropdown-item href="#">FA</b-dropdown-item>
-          </b-nav-item-dropdown>
-
           <b-nav-item-dropdown right v-if="user.id">
             <!-- Using 'button-content' slot -->
-            <template slot="button-content"><em>User</em></template>
+            <template slot="button-content"><img src="../assets/static/user.svg" class="user"></template>
             <b-dropdown-item @click="viewMyKeeps">My Keeps</b-dropdown-item>
             <b-dropdown-item @click="viewMyVaults">My Vaults</b-dropdown-item>
-            <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
-            <button v-if="user.id" @click="logout">logout</button>
-            <router-link v-else :to="{name: 'login'}">Login</router-link>
+            <b-dropdown-item v-if="user.id" @click="logout">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown right v-else>
             <!-- Using 'button-content' slot -->
-            <template slot="button-content"><em>User</em></template>
-            <b-dropdown-item href=@click="Home">Keeps</b-dropdown-item>
+            <template slot="button-content"><img src="../assets/static/user.svg" class="user"></template>
             <b-dropdown-item href="#">Create Account</b-dropdown-item>
             <b-dropdown-item href="{name: 'login'}">Sign In</b-dropdown-item>
 
@@ -78,3 +68,16 @@
 
   };
 </script>
+<style>
+  .user {
+    height: 3vw;
+    min-height: 32px;
+    max-height: 40px;
+  }
+
+  .home {
+    height: 5vw;
+    min-height: 32px;
+    max-height: 56px;
+  }
+</style>

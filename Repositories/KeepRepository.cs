@@ -14,9 +14,9 @@ namespace keepr.Repositories
       _db = db;
     }
 
-    public IEnumerable<Keep> GetALL()
+    public IEnumerable<Keep> GetALL(string userId)
     {
-      return _db.Query<Keep>("SELECT * FROM keeps WHERE isPrivate=0;");
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE (isPrivate=0 OR userId=@userId);", new { userId });
     }
 
     public Keep GetById(int id)
@@ -47,15 +47,23 @@ namespace keepr.Repositories
       return value;
     }
 
-    public Keep Update(Keep value)
+    public Keep UpdateCount(ViewKeep value)
     {
       string query = @"
       UPDATE keeps
       SET
-        name = @Name,
-        description = @Description,
-        img = @Img,
-        isPrivate = @isPrivate
+        views = @Views
+        WHERE id =@Id;
+        SELECT * FROM keeps WHERE id = @Id;";
+      return _db.QueryFirstOrDefault<Keep>(query, value);
+    }
+
+    public Keep UpdateKeeps(KeepCount value)
+    {
+      string query = @"
+      UPDATE keeps
+      SET
+        keeps = @Keeps
         WHERE id =@Id;
         SELECT * FROM keeps WHERE id = @Id;";
       return _db.QueryFirstOrDefault<Keep>(query, value);

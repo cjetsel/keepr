@@ -1,6 +1,5 @@
 <template>
   <div class="vaultkeep">
-    vault keep deets
     <b-card-group columns>
       <keeps v-for="keep in vaultKeeps" :keep="keep" />
     </b-card-group>

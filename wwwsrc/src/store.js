@@ -121,8 +121,6 @@ export default new Vuex.Store({
         })
     },
     async getKeepById({ commit, dispatch }, keepId) {
-      //update view
-
       await api.get('keeps/' + keepId)
         .then(res => {
           commit('setMyKeep', res.data)
@@ -132,6 +130,20 @@ export default new Vuex.Store({
       await api.get('keeps/user')
         .then(res => {
           commit('setMyKeeps', res.data)
+        })
+    },
+
+    async updateViews({ commit, dispatch }, data) {
+      await api.put('keeps/' + data.id + 'views', data)
+        .then(res => {
+          commit("setKeeps", res.data)
+        })
+    },
+
+    async updateKeeps({ commit, dispatch }, data) {
+      await api.put('keeps/' + data.id + 'keeps', data)
+        .then(res => {
+          commit("setKeeps", res.data)
         })
     },
 

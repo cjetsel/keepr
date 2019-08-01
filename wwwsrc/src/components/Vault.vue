@@ -1,12 +1,13 @@
 <template>
-  <b-card :title="vault.name" img-src="https://placekitten.com/500/350" img-alt="Image" img-top>
+  <b-card :title="vault.name">
     <b-card-text>
       {{vault.description}}
     </b-card-text>
-    <b-card-text class="small text-muted">Last updated 3 mins ago</b-card-text>
-    <b-button @click="viewVault()">View Vault</b-button>
-    <b-button v-if="vault.userId == user.id" @click="deleteVault()">Delete Vault</b-button>
-
+    <b-button variant="light" @click="viewVault()"><img src="../assets/static/views.svg" alt="" class="button-img"> View
+      Vault
+    </b-button>
+    <b-button variant="light" v-if="vault.userId == user.id" @click="deleteVault()"><img
+        src="../assets/static/delete.svg" alt="" class="button-img"></b-button>
   </b-card>
 </template>
 <script>

@@ -12,11 +12,6 @@
   export default {
     name: "keep",
     props: ["keepId"],
-    data() {
-      return {
-
-      }
-    },
     mounted() {
       return this.$store.dispatch('getAllKeeps');
       // this.$store.dispatch('upViewCount'); -- this will up count on page load?

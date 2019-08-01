@@ -16,11 +16,16 @@
 
 <style>
   #app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    font-family: 'Nunito', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+
+  }
+
+  body {
+    background-color: #4dd0e142;
   }
 
   #nav {
@@ -34,5 +39,10 @@
 
   #nav a.router-link-exact-active {
     color: #42b983;
+  }
+
+  .button-img {
+    min-height: 30px;
+    max-height: 30px;
   }
 </style>

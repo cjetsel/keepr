@@ -19,4 +19,16 @@ namespace keepr.Models
     public int Keeps { get; set; }
 
   }
+  public class ViewKeep
+  {
+    public int Id { get; set; }
+    public int Views { get; set; }
+
+  }
+  public class KeepCount
+  {
+    public int Id { get; set; }
+    public int Keeps { get; set; }
+
+  }
 }

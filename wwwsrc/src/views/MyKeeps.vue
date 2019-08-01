@@ -1,10 +1,7 @@
 <template>
   <div class="home">
-    <h1>Welcome Home {{user.username}}</h1>
-    MY KEEPS
-    <button v-if="user.id" @click="logout">logout</button>
-    <router-link v-else :to="{name: 'login'}">Login</router-link>
-
+    <h1>{{user.username}}'s Loves</h1>
+    <keepForm />
     <b-card-group columns>
       <keeps v-for="keep in myKeeps" :keep="keep" /><!-- V for keeps in keep on b-card -->
     </b-card-group>
@@ -13,7 +10,8 @@
 
 <script>
   import Navbar from "../components/Navbar.vue";
-  import Keeps from "../components/Keeps.vue"
+  import Keeps from "../components/Keeps.vue";
+  import KeepForm from "../components/KeepForm.vue";
   export default {
     name: "MyKeeps",
     data() {
@@ -47,7 +45,8 @@
     },
     components: {
       Navbar,
-      Keeps
+      Keeps,
+      KeepForm
     }
   };
 </script>

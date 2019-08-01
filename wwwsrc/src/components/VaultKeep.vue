@@ -19,18 +19,17 @@
         </div>
       </div>
     </b-card-text>
-    <b-button variant="light" @click="viewKeep()"><img src="../assets/static/views.svg" class="button-img"></b-button>
-
-    <b-dropdown variant="light" v-if="user" class="m-2">
+    <b-button @click="viewKeep()"><img src="../assets/static/views.svg" class="button-img"> View</b-button>
+    <b-dropdown v-if="user">
       <template slot="button-content">
-        <img src="../assets/static/addkeep.svg" class="button-img"> Add to A Vault
+        <img src="../assets/static/removekeep.svg" class="button-img"> Remove From Vault
       </template>
       <!-- <div v-if="id.boardId == boardId"> -->
-      <b-dropdown-item v-for="vault in vaults" :vault="vault.id" @click="addToVault(vault.id)">
+      <b-dropdown-item v-for="vault in vaults" :vault="vault.id" @click="removeFromVault(vault.id)">
         {{vault.name}}</b-dropdown-item>
     </b-dropdown>
-    <b-button variant="light" v-if="keep.userId == user.id" @click="deleteKeep()"> <img
-        src="../assets/static/delete.svg" class="button-img"></b-button>
+    <b-button v-if="keep.userId == user.id" @click="deleteKeep()"> <img src="../assets/static/delete.svg"
+        class="button-img">Delete</b-button>
   </b-card>
 </template>
 <script>

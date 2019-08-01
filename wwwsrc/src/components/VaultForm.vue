@@ -29,7 +29,6 @@
     },
     methods: {
       addVault() {
-        debugger
         let data = this.form;
         this.$store.dispatch('createVault', data);
       }
