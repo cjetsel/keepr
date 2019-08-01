@@ -13,14 +13,13 @@
 
         <!-- add if image -->
         <b-form-group id="group-2" label="img url" label-for="img">
-          <b-form-input id="img" v-model="form.img" type="text" placeholder="Image URL!">
+          <b-form-input id="img" v-model="form.img" type="text" placeholder="Image URL">
           </b-form-input>
         </b-form-group>
 
-        <!-- otherwise its a quote? some default image? haha -->
-        <button type="submit" class="btn rounded-circle"> <img src="../assets/static/addluv.svg" class="button-img">
-        </button>
       </b-form-row>
+      <button type="submit" class="btn rounded-circle"> <img src="../assets/static/addluv.svg" class="button-img">
+      </button>
     </b-form>
   </div>
 </template>
@@ -33,14 +32,13 @@
           name: '',
           description: '',
           img: '',
-          isPrivate: true
+          isPrivate: false
 
         }
       }
     },
     methods: {
       addKeep() {
-        debugger
         let data = this.form;
         this.$store.dispatch('createKeep', data);
       }
@@ -50,7 +48,7 @@
 <style scoped>
   .btn {
     border-radius: 50%;
-    
+
   }
 
   .button-img {

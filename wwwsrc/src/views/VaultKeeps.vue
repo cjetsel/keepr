@@ -1,8 +1,12 @@
 <template>
   <div class="vaultkeep">
-    <b-card-group columns>
+    <b-card-group columns v-if="vaultKeeps[0]">
       <keeps v-for="keep in vaultKeeps" :keep="keep" />
     </b-card-group>
+    <div v-else>
+      <img class="default m-5" src="../assets/static/default.svg" alt="">
+      <h5><em>Looks like there's nothing here....</em></h5>
+    </div>
   </div>
 </template>
 
@@ -49,3 +53,10 @@
     }
   };
 </script>
+<style>
+  .default {
+    height: 10vw;
+    min-height: 100px;
+    max-height: 300px;
+  }
+</style>

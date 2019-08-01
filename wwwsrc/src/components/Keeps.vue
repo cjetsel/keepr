@@ -25,7 +25,7 @@
       <template slot="button-content">
         <img src="../assets/static/addkeep.svg" class="button-img"> Add to A Vault
       </template>
-      <!-- <div v-if="id.boardId == boardId"> -->
+
       <b-dropdown-item v-for="vault in vaults" :vault="vault.id" @click="addToVault(vault.id)">
         {{vault.name}}</b-dropdown-item>
     </b-dropdown>

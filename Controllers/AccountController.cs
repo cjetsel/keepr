@@ -70,7 +70,7 @@ namespace Keepr.Controllers
       }
     }
 
-    // [Authorize]// Only Authenticated users will be allowed into this method
+    [Authorize]// Only Authenticated users will be allowed into this method
     [HttpGet("Authenticate")]
     public async Task<ActionResult<User>> Authenticate()
     {

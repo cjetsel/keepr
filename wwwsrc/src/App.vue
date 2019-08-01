@@ -1,6 +1,6 @@
 <template>
   <b-container id="app" fluid>
-    <navbar />
+    <navbar class="mb-3" />
     <router-view />
 
   </b-container>
@@ -21,7 +21,6 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-
   }
 
   body {

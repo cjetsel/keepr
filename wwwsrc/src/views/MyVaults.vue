@@ -1,9 +1,14 @@
 <template>
   <div class="home">
-    <vaultForm />
-    <b-card-group columns>
+    <h4 class="mb-3">Keep the luvs you want together here! Create a vault and add your luvs to it.</h4>
+    <vaultForm class="mb-3" />
+    <b-card-group column v-if="vaults[0]">
       <vault v-for="vault in vaults" :vault="vault" /><!-- V for keeps in keep on b-card -->
     </b-card-group>
+    <div v-else>
+      <img class="default m-5" src="../assets/static/default.svg" alt="">
+      <h5><em>Looks like you need to add some vaults!</em></h5>
+    </div>
   </div>
 </template>
 
